@@ -302,7 +302,6 @@
       .chart-container {
         width: 100%;
         max-width: 100%;
-        overflow-x: auto;
         background: #ffffff;
         border: 1px solid #e9ecef;
         border-radius: 20px;
@@ -310,19 +309,20 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         margin-bottom: 25px;
         transition: all 0.3s ease;
-      }
-      .chart-container:hover {
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      }
-      @media (max-width: 768px) {
-        .chart-container {
-          padding: 15px;
-        }
+        min-height: 500px;
       }
       .chart-container canvas {
         width: 100% !important;
-        height: auto !important;
-        max-height: 400px;
+        height: 800px !important;
+      }
+      @media (max-width: 768px) {
+        .chart-container {
+          min-height: 300px;
+          padding: 15px;
+        }
+        .chart-container canvas {
+          height: 300px !important;
+        }
       }
       /* Insight Section */
       .insight {
@@ -520,7 +520,6 @@
           options: {
             responsive: true,
             maintainAspectRatio: false,
-            aspectRatio: 1.5,
             plugins: {
               title: {
                 display: true,
