@@ -300,10 +300,13 @@
       }
       /* Chart Container */
       .chart-container {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
         background: #ffffff;
         border: 1px solid #e9ecef;
         border-radius: 20px;
-        padding: 30px;
+        padding: 20px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         margin-bottom: 25px;
         transition: all 0.3s ease;
@@ -313,8 +316,13 @@
       }
       @media (max-width: 768px) {
         .chart-container {
-          padding: 20px 15px;
+          padding: 15px;
         }
+      }
+      .chart-container canvas {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 400px;
       }
       /* Insight Section */
       .insight {
@@ -480,10 +488,10 @@
           compoundData.push(starting * Math.pow(1.01, i));
           linearData.push(starting * (1 + 0.01 * i));
         }
+        const ctx = document.getElementById("chart").getContext("2d");
         if (chart) {
           chart.destroy();
         }
-        const ctx = document.getElementById("chart").getContext("2d");
         chart = new Chart(ctx, {
           type: "line",
           data: {
@@ -511,8 +519,8 @@
           },
           options: {
             responsive: true,
-            maintainAspectRatio: true,
-            aspectRatio: 2,
+            maintainAspectRatio: false,
+            aspectRatio: 1.5,
             plugins: {
               title: {
                 display: true,
@@ -571,6 +579,11 @@
       }
       document.getElementById("days").addEventListener("input", calculate);
       document.getElementById("starting").addEventListener("input", calculate);
+      window.addEventListener("resize", function () {
+        if (chart) {
+          chart.resize();
+        }
+      });
       calculate();
     </script>
   </body>
